@@ -26,5 +26,16 @@
     "react-native": "~0.55.2",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^2.11.2"
+  },
+  "expo": {
+    "name": "your app name",
+    "description": "your app desc",
+    "ios": {
+      "supportsTablet": true
+    },
+
+    "android": {
+      "package": "com.airtainment.Airtainment"
+    }
   }
 }
