@@ -32,7 +32,7 @@ class TVScreen extends React.Component {
     let ref = firebase.database().ref('userid/tvshows');
     ref.on('value', snapshot => {
       let result = snapshot.val();
-      console.log(result);
+      // console.log(result);
       this.setState({ data: result });
     });
   }
@@ -98,8 +98,8 @@ class TVScreen extends React.Component {
                   />
                 </View>
                 <View style={styles.headerContentStyle}>
-                  <Text style={styles.headerTextStyle}>title</Text>
-                  <Text>artist</Text>
+                  <Text style={styles.headerTextStyle}>{item.title}</Text>
+                  <Text style={{marginTop: 10}}>{item.artist}</Text>
                 </View>
               </CardSection>
             </Card>
@@ -136,10 +136,12 @@ class TVScreen extends React.Component {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    margin:40,
+    alignItems:'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 22
   },
   thumbnailStyle: {
     height: 150,
