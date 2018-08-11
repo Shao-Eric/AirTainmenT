@@ -104,7 +104,7 @@ class MovieScreen extends React.Component {
               </CardSection>
             </Card>
           )}
-          keyExtractor={item => item.link}
+          keyExtractor={item => item.artist}
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
         />
