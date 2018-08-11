@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, FlatList } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
+import { Entypo } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -10,6 +11,10 @@ class MovieScreen extends React.Component {
   state = {
     data: []
   };
+
+  static navigationOptions = ({ navigation }) => ({
+    tabBarIcon: () => <Entypo name="tv" size={30} color="#1b3039" />
+  });
 
   componentDidMount() {
     let ref = firebase.database().ref('userid/music');
