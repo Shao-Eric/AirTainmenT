@@ -37,7 +37,8 @@ const MainNavigator = createStackNavigator(
 );
 
 export default class App extends React.Component {
-  componentDidMount() {
+  
+  componentWillMount() {
     const config = {
       apiKey: 'AIzaSyCfgGAENd9pnKaij4hDPKp1ttgswzK4Y1g',
       authDomain: 'airtainment-dba73.firebaseapp.com',

@@ -19,12 +19,21 @@ class WelcomeScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     sessionStarted: false,
-    bar: 'Scan a BARcode to begin'
+    bar: 'Scan a BARcode to begin',
+    imageUrl:'',
+    title:''
   }
 
   async componentWillMount () {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({ hasCameraPermission: status === 'granted' })
+  }
+
+  componentDidMount = () => {
+    firebase.database().ref('tablet/currentlyPlaying').on('value', (v) => {
+      let data = v.val()
+      this.setState({imageUrl:data.image, title:data.title, isPlaying: data.isPlaying})
+    })
   }
 
   buttonPress = () => {
@@ -41,8 +50,7 @@ class WelcomeScreen extends React.Component {
   }
 
   changePlayStatus = () => {
-    const getPlayStatus = this.state.isPlaying
-    this.setState({ isPlaying: !getPlayStatus })
+    firebase.database().ref('tablet/currentlyPlaying/isPlaying').set(!this.state.isPlaying)
   }
 
   render () {
@@ -58,8 +66,8 @@ class WelcomeScreen extends React.Component {
           source={require('../assets/CityDimmed.jpg')}
           style={{ flex: 1, alignItems: 'center' }}
         >
-          <View style={{ width: '100%', opacity: 0.3 }}>
-            <Header headerText='Airtainment' color='black' bar={this.state.bar} />
+          <View style={{ width: '100%' }}>
+            <Header headerText='Airtainment'  bar={this.state.bar} />
           </View>
            { !this.state.sessionStarted ?
            <View>
@@ -86,8 +94,8 @@ class WelcomeScreen extends React.Component {
             style={{
               color: 'white',
               textAlign: 'center',
-              fontWeight: '100',
-              fontSize: 30
+              fontWeight: '400',
+              fontSize: 25
             }}
           >To connect to your screen
           </Text>
@@ -153,6 +161,7 @@ class WelcomeScreen extends React.Component {
                 color: 'white',
                 alignSelf: 'center',
                 fontSize: 25,
+                fontWeight: 'bold',
                 textAlign: 'center'
               }}
             >
@@ -181,15 +190,15 @@ class WelcomeScreen extends React.Component {
                       flexDirection: 'row'
                     }}
                   >
-                    <View
+                    <Image
+                      source={{uri: this.state.imageUrl}}
                       style={{
-                        backgroundColor: 'white',
-                        borderRadius: 40,
+                        borderRadius: 25,
                         width: 50,
                         height: 50
                       }}
                     />
-                    <Text style={{ fontSize: 18, marginLeft: 15 }}>Movie</Text>
+                    <Text style={{ fontSize: 18, marginLeft: 15 }}>{this.state.title}</Text>
                   </View>
                 </View>
                 <TouchableWithoutFeedback
