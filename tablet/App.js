@@ -7,6 +7,7 @@ import Drawer from 'react-native-drawer-menu';
 import {Easing} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+
 export default class App extends React.Component {
   componentWillMount() {
     let config = {
@@ -17,8 +18,8 @@ export default class App extends React.Component {
       storageBucket: "airtainment-dba73.appspot.com",
       messagingSenderId: "471409054224"
     };
-
     firebase.initializeApp(config);
+    console.disableYellowBox = true;
   }
 
   goBack=()=>{
@@ -57,16 +58,9 @@ export default class App extends React.Component {
       </ScrollView>
     )
 
-    let routeName;
-    if(this.navigator) {
-      const routes = this.navigator.getCurrentRoutes();
-      routeName = routes[routes.length-1].name;
-    }
-    console.log(routeName)
-
     return (
     <View style={{flex: 1}}>
-      <Header openDrawer={()=> this.drawer.openDrawer()} goBack={()=>this.goBack()} backVisible={(routeName!=="QrScreen")}/>
+      <Header toggleDrawer={()=> this.drawer.openDrawer()} goBack={()=>this.goBack()} backVisible/>
 
       <Drawer
         ref={compenent => this.drawer = compenent}

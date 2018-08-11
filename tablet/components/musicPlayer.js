@@ -21,10 +21,10 @@ export default class MusicPlayer extends React.Component {
 		this.setState({music: this.props.song})
 
     await this.soundObject.loadAsync({uri: this.props.song.link});
-    firebase.database().ref("tablet/currentlyPlaying").set({isPlaying: false, image: this.props.song.image, title: this.props.song.title})
+    firebase.database().ref("tablet/currentlyPlaying").set({isPlaying: false, type: "audio", image: this.props.song.image, title: this.props.song.title})
 
     firebase.database().ref("tablet/currentlyPlaying/isPlaying").on('value', (v)=>{
-      if(v.val()){
+      if(!v.val()){
         this.soundObject.pauseAsync()
       }else{
         this.soundObject.playAsync()
@@ -34,7 +34,8 @@ export default class MusicPlayer extends React.Component {
 	}
 
   componentWillUnmount(){
-    this.soundObject.stopAsync()
+    this.soundObject.unloadAsync()
+		firebase.database().ref("tablet/currentlyPlaying/type").set("audio")
   }
 
   render() {
@@ -56,10 +57,7 @@ export default class MusicPlayer extends React.Component {
 							<Image source={require("../images/ic_action_play_arrow.png")} style = {{width:50,height:50}}/>:
 							<Image source={require("../images/ic_action_pause.png")} style={{width: 50, height: 50}}/>}
 					</TouchableOpacity>
-					<Slider
-						value={this.state.value}
-						onValueChange={value => this.setState({ value })}
-					/>
+
 				</View>
 
 			</View>
