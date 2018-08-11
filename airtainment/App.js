@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { YellowBox, StyleSheet, Text, View } from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator
@@ -9,6 +9,9 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import MovieScreen from './screens/MovieScreen';
 import MusicScreen from './screens/MusicScreen';
 import TVScreen from './screens/TVScreen';
+
+
+YellowBox.ignoreWarnings(['Warning: ReactNative.createElement'])
 
 const MainNavigator = createStackNavigator(
   {
@@ -44,6 +47,7 @@ export default class App extends React.Component {
       messagingSenderId: '471409054224'
     };
     firebase.initializeApp(config);
+    console.disableYellowBox = true
   }
   render() {
     return <MainNavigator />;

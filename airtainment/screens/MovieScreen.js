@@ -1,31 +1,48 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Modal,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import Header from '../common/Header';
-import VideoCards from '../common/VideoCards';
-import VideoCardSection from '../common/VideoCardSection';
+import Card from '../common/Card';
+import CardSection from '../common/CardSection';
+import Button from '../common/Button';
+
 
 class MovieScreen extends React.Component {
   state = {
-    data: []
+    data: [],
+    modalVisible: false
   };
-
   static navigationOptions = ({ navigation }) => ({
-    tabBarIcon: () => <Entypo name="video" size={30} color="#1b3039" />
+    tabBarIcon: () => <Entypo name="video"  size={30} color="#1b3039" />
   });
 
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
   componentDidMount() {
     let ref = firebase.database().ref('userid/movies');
     ref.on('value', snapshot => {
       let result = snapshot.val();
-      console.log(result);
+      // console.log(result);
       this.setState({ data: result });
     });
   }
   renderHeader = () => {
-    return <SearchBar placeholder="Seach movies" darkTheme round />;
+    return (
+      <View>
+        <SearchBar placeholder="Search movies" darkTheme round />
+        {this.renderFooter()}
+      </View>
+    );
   };
   renderSeparator = () => {
     return (
@@ -40,6 +57,30 @@ class MovieScreen extends React.Component {
     );
   };
 
+  renderFooter = () => {
+    return (
+      <View
+        style={{
+          borderBottomWidth: 1,
+          padding: 5,
+          backgroundColor: '#fff',
+          flexDirection: 'row',
+          borderColor: '#ddd',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+      <Button
+        onPress={() => {
+          this.setModalVisible(true);
+        }}
+      >
+        <MaterialIcons name="add" size={40} />
+      </Button>
+      </View>
+    );
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -47,18 +88,46 @@ class MovieScreen extends React.Component {
           style={{ flex: 1 }}
           data={this.state.data}
           renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.title}`}
-              subtitle={item.title}
-              avatar={{ uri: item.image }}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
+            <Card>
+              <CardSection>
+                <View style={styles.thumbnailContainerStyle}>
+                  <Image
+                    style={styles.thumbnailStyle}
+                    source={{ uri: item.image }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={styles.headerContentStyle}>
+                  <Text style={styles.headerTextStyle}>{item.title}</Text>
+                  <Text style={{marginTop: 10}} >{item.artist}</Text>
+                </View>
+              </CardSection>
+            </Card>
           )}
-          keyExtractor={item => item.link}
+          keyExtractor={item => item.artist}
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
         />
+        <Modal
+          animationType="fade"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}
+        >
+          <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            >
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -67,14 +136,16 @@ class MovieScreen extends React.Component {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    
+    alignItems:'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 22
   },
   thumbnailStyle: {
-    height: 100,
-    width: 50
+    height: 150,
+    width: 150
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',

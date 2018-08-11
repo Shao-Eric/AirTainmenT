@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, FlatList, Modal, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, Modal, TouchableOpacity,Image } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo,MaterialIcons } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -25,14 +25,14 @@ class MusicScreen extends React.Component {
     let ref = firebase.database().ref('userid/music');
     ref.on('value', snapshot => {
       let result = snapshot.val();
-      console.log(result);
+      // console.log(result);
       this.setState({ data: result });
     });
   }
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." lightTheme round />
+        <SearchBar placeholder="Search music" darkTheme round />
         {this.renderFooter()}
       </View>
     );
@@ -68,7 +68,7 @@ class MusicScreen extends React.Component {
             this.setModalVisible(true);
           }}
         >
-          ADD
+          <MaterialIcons name="add" size={40}  />
         </Button>
       </View>
     );
@@ -77,58 +77,70 @@ class MusicScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ flex: 1 }}
-          data={this.state.data}
-          renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.artist}`}
-              subtitle={item.title}
-              avatar={{ uri: item.image }}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
-          )}
-          keyExtractor={item => item.link}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-        />
-        <Modal
-          animationType="fade"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert('Modal has been closed.');
-          }}
+      <FlatList
+        style={{ flex: 1 }}
+        data={this.state.data}
+        renderItem={({ item }) => (
+          <Card>
+            <CardSection>
+              <View style={styles.thumbnailContainerStyle}>
+                <Image
+                  style={styles.thumbnailStyle}
+                  source={{ uri: item.image }}
+                  resizeMode="contain"
+                />
+              </View>
+              <View style={styles.headerContentStyle}>
+                <Text style={styles.headerTextStyle}>{item.title}</Text>
+                <Text style={{marginTop: 10}} >{item.artist}</Text>
+              </View>
+            </CardSection>
+          </Card>
+        )}
+        keyExtractor={item => item.artist}
+        ItemSeparatorComponent={this.renderSeparator}
+        ListHeaderComponent={this.renderHeader}
+      />
+      <Modal
+        animationType="fade"
+        transparent={false}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          alert('Modal has been closed.');
+        }}
+      >
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          <TouchableOpacity
+            onPress={() => {
+              this.setModalVisible(!this.state.modalVisible);
+            }}
           >
-            <TouchableOpacity
-              onPress={() => {
-                this.setModalVisible(!this.state.modalVisible);
-              }}
-            >
-              <Text>Close Modal</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
+            <Text>Close Modal</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </View>
     );
   }
 }
 
+
+
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    margin:40,
+    alignItems:'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 22
   },
   thumbnailStyle: {
-    height: 50,
-    width: 50
+    height: 150,
+    width: 150
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',
