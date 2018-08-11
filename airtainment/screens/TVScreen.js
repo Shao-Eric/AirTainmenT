@@ -39,7 +39,7 @@ class TVScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." darkTheme round />
+        <SearchBar placeholder="Search TV shows" darkTheme round />
         {this.renderFooter()}
       </View>
     );

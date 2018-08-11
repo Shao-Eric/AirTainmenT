@@ -32,7 +32,7 @@ class MusicScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." darkTheme round />
+        <SearchBar placeholder="Search music" darkTheme round />
         {this.renderFooter()}
       </View>
     );
