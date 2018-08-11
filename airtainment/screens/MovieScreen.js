@@ -13,7 +13,7 @@ class MovieScreen extends React.Component {
   };
 
   static navigationOptions = ({ navigation }) => ({
-    tabBarIcon: () => <Entypo name="video" size={30} color="#1b3039" />
+    tabBarIcon: () => <Entypo name="video" text="test" size={30} color="#1b3039" />
   });
 
   componentDidMount() {
