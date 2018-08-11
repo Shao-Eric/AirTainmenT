@@ -4,12 +4,21 @@ import MediaScreen from '../pages/MediaScreen'
 import LibraryScreen from '../pages/QrScreen'
 export default createStackNavigator({
   QrScreen: {
-    screen: QrScreen
+    screen: QrScreen, 
+    navigationOptions: {
+      header: null
+    }
   },
   MediaScreen: {
-    screen: MediaScreen
+    screen: MediaScreen,
+    navigationOptions: {
+      header: null
+    }
   },
   LibraryScreen: {
-    screen: LibraryScreen
+    screen: LibraryScreen,
+    navigationOptions: {
+      header: null
+    }
   }
 });
