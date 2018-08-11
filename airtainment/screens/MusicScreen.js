@@ -1,16 +1,20 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Modal, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
+import Button from '../common/Button';
 
 class MusicScreen extends React.Component {
   state = {
-    data: []
+    data: [],
+    modalVisible: false
   };
-
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
   componentDidMount() {
     let ref = firebase.database().ref('userid/music');
     ref.on('value', snapshot => {
@@ -39,6 +43,26 @@ class MusicScreen extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <Header headerText="Music" />
+        <View
+          style={{
+            borderBottomWidth: 1,
+            padding: 5,
+            backgroundColor: '#fff',
+            flexDirection: 'row',
+            borderColor: '#ddd',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Button
+            onPress={() => {
+              this.setModalVisible(true);
+            }}
+          >
+            ADD
+          </Button>
+        </View>
+
         <FlatList
           style={{ flex: 1 }}
           data={this.state.data}
@@ -55,6 +79,26 @@ class MusicScreen extends React.Component {
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
         />
+        <Modal
+          animationType="fade"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}
+        >
+          <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
+            <Button
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            >
+              Close Modal
+            </Button>
+          </View>
+        </Modal>
       </View>
     );
   }
