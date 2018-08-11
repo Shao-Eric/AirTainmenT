@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import { Platform, StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import Header from '../common/Header'
 import { BarCodeScanner, Permissions } from 'expo';
@@ -60,6 +61,21 @@ class WelcomeScreen extends React.Component {
           </ImageBackground>
       );
     }
+=======
+import { Text, View } from 'react-native';
+
+class WelcomeScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>WelcomeScreen</Text>
+        <Text>WelcomeScreen</Text>
+        <Text>WelcomeScreen</Text>
+        <Text>WelcomeScreen</Text>
+        <Text>WelcomeScreen</Text>
+      </View>
+    );
+>>>>>>> Stashed changes
   }
 }
 
