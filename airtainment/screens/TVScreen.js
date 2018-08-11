@@ -29,7 +29,7 @@ class TVScreen extends React.Component {
     this.setState({ modalVisible: visible });
   }
   componentDidMount() {
-    let ref = firebase.database().ref('userid/music');
+    let ref = firebase.database().ref('userid/movies');
     ref.on('value', snapshot => {
       let result = snapshot.val();
       console.log(result);
@@ -39,7 +39,7 @@ class TVScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." lightTheme round />;
+        <SearchBar placeholder="Type Here..." lightTheme round />
         {this.renderFooter()}
       </View>
     );

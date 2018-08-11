@@ -32,7 +32,7 @@ class MusicScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." lightTheme round />;
+        <SearchBar placeholder="Type Here..." lightTheme round />
         {this.renderFooter()}
       </View>
     );
@@ -83,7 +83,7 @@ class MusicScreen extends React.Component {
           renderItem={({ item }) => (
             <ListItem
               roundAvatar
-              title={`${item.title}`}
+              title={`${item.artist}`}
               subtitle={item.title}
               avatar={{ uri: item.image }}
               containerStyle={{ borderBottomWidth: 0 }}
