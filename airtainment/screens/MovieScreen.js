@@ -43,7 +43,6 @@ class MovieScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header headerText="Music" />
         <FlatList
           style={{ flex: 1 }}
           data={this.state.data}
