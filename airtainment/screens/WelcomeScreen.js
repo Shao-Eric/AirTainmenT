@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: '#085ff7'
+    backgroundColor: '#6f79a8'
   }
 })
 export default WelcomeScreen

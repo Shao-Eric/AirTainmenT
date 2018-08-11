@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, FlatList, Modal, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo,MaterialIcons } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -68,7 +68,7 @@ class MusicScreen extends React.Component {
             this.setModalVisible(true);
           }}
         >
-          <Entypo name="circle-with-plus" size={30} color="lightGray" />
+          <MaterialIcons name="add" size={40}  />
         </Button>
       </View>
     );
