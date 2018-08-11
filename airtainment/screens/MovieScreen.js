@@ -99,7 +99,7 @@ class MovieScreen extends React.Component {
                 </View>
                 <View style={styles.headerContentStyle}>
                   <Text style={styles.headerTextStyle}>title</Text>
-                  <Text>artist</Text>
+                  <Text style={{marginTop: 10}} >artist</Text>
                 </View>
               </CardSection>
             </Card>
@@ -136,7 +136,9 @@ class MovieScreen extends React.Component {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    margin:40,
+    alignItems:'center'
   },
   headerTextStyle: {
     fontSize: 18

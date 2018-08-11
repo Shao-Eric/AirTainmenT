@@ -121,7 +121,9 @@ class MusicScreen extends React.Component {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    margin:40,
+    alignItems:'center'
   },
   headerTextStyle: {
     fontSize: 18
