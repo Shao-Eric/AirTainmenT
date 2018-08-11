@@ -219,8 +219,9 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     display: 'flex',
+    fontWeight: 'bold',
     justifyContent: 'center',
-    backgroundColor: '#085ff7'
+    backgroundColor: '#6f79a8'
   }
 })
 export default WelcomeScreen

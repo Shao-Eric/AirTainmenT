@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -39,7 +39,7 @@ class TVScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." darkTheme round />
+        <SearchBar placeholder="Search TV shows" darkTheme round />
         {this.renderFooter()}
       </View>
     );
@@ -75,7 +75,7 @@ class TVScreen extends React.Component {
           this.setModalVisible(true);
         }}
       >
-        <Entypo name="circle-with-plus" size={30} color="" />
+        <MaterialIcons name="add" size={40}  />
       </Button>
       </View>
     );

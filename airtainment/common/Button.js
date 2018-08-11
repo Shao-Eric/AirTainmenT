@@ -20,8 +20,8 @@ const styles = {
   },
   buttonStyle: {
     flex: 1,
-
-    backgroundColor: '#303337',
+    fontWeight: 'bold',
+    backgroundColor: '#f5f5f5',
 
   }
 };
