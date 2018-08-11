@@ -1,23 +1,35 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Modal,
+  TouchableOpacity,
+  Image
+} from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
+import Button from '../common/Button';
 
 class MovieScreen extends React.Component {
   state = {
-    data: []
+    data: [],
+    modalVisible: false
   };
-
   static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'Settings',
     tabBarIcon: () => <Entypo name="tv" size={30} color="#1b3039" />
   });
 
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
   componentDidMount() {
-    let ref = firebase.database().ref('userid/music');
+    let ref = firebase.database().ref('userid/movies');
     ref.on('value', snapshot => {
       let result = snapshot.val();
       console.log(result);
@@ -25,7 +37,12 @@ class MovieScreen extends React.Component {
     });
   }
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />
+    return (
+      <View>
+        <SearchBar placeholder="Type Here..." lightTheme round />
+        {this.renderFooter()}
+      </View>
+    );
   };
   renderSeparator = () => {
     return (
@@ -40,6 +57,30 @@ class MovieScreen extends React.Component {
     );
   };
 
+  renderFooter = () => {
+    return (
+      <View
+        style={{
+          borderBottomWidth: 1,
+          padding: 5,
+          backgroundColor: '#fff',
+          flexDirection: 'row',
+          borderColor: '#ddd',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Button
+          onPress={() => {
+            this.setModalVisible(true);
+          }}
+        >
+          ADD
+        </Button>
+      </View>
+    );
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -47,18 +88,46 @@ class MovieScreen extends React.Component {
           style={{ flex: 1 }}
           data={this.state.data}
           renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.title}`}
-              subtitle={item.title}
-              avatar={{ uri: item.image }}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
+            <Card>
+              <CardSection>
+                <View style={styles.thumbnailContainerStyle}>
+                  <Image
+                    style={styles.thumbnailStyle}
+                    source={{ uri: item.image }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={styles.headerContentStyle}>
+                  <Text style={styles.headerTextStyle}>title</Text>
+                  <Text>artist</Text>
+                </View>
+              </CardSection>
+            </Card>
           )}
           keyExtractor={item => item.link}
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
         />
+        <Modal
+          animationType="fade"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}
+        >
+          <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+            >
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -73,8 +142,8 @@ const styles = {
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 50,
-    width: 50
+    height: 150,
+    width: 150
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',

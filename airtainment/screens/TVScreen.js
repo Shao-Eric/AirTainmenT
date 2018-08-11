@@ -29,7 +29,7 @@ class TVScreen extends React.Component {
     this.setState({ modalVisible: visible });
   }
   componentDidMount() {
-    let ref = firebase.database().ref('userid/movies');
+    let ref = firebase.database().ref('userid/tvshows');
     ref.on('value', snapshot => {
       let result = snapshot.val();
       console.log(result);
