@@ -3,8 +3,8 @@ import { Text, View, FlatList } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import Header from '../common/Header';
-import Card from '../common/Card';
-import CardSection from '../common/CardSection';
+import VideoCards from '../common/VideoCards';
+import VideoCardSection from '../common/VideoCardSection';
 
 class MovieScreen extends React.Component {
   state = {
@@ -20,7 +20,7 @@ class MovieScreen extends React.Component {
     });
   }
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return <SearchBar placeholder="Seach movies" darkTheme round />;
   };
   renderSeparator = () => {
     return (
@@ -28,7 +28,7 @@ class MovieScreen extends React.Component {
         style={{
           height: 1,
           width: '86%',
-          backgroundColor: '#CED0CE',
+          backgroundColor: '#708690',
           marginLeft: '14%'
         }}
       />
@@ -38,7 +38,6 @@ class MovieScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header headerText="Music" />
         <FlatList
           style={{ flex: 1 }}
           data={this.state.data}
@@ -69,7 +68,7 @@ const styles = {
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 50,
+    height: 100,
     width: 50
   },
   thumbnailContainerStyle: {
