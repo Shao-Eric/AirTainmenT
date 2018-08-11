@@ -29,7 +29,7 @@ class TVScreen extends React.Component {
     this.setState({ modalVisible: visible });
   }
   componentDidMount() {
-    let ref = firebase.database().ref('userid/movies');
+    let ref = firebase.database().ref('userid/tvshows');
     ref.on('value', snapshot => {
       let result = snapshot.val();
       console.log(result);
@@ -70,13 +70,13 @@ class TVScreen extends React.Component {
           alignItems: 'center'
         }}
       >
-        <Button
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          ADD
-        </Button>
+      <Button
+        onPress={() => {
+          this.setModalVisible(true);
+        }}
+      >
+        <Entypo name="circle-with-plus" size={30} color="" />
+      </Button>
       </View>
     );
   };

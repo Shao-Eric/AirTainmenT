@@ -36,7 +36,7 @@ class WelcomeScreen extends React.Component {
       .database()
       .ref(data + '/userid')
       .set('userid')
-    
+
     this.setState({sessionStarted: true})
   }
 
@@ -59,7 +59,7 @@ class WelcomeScreen extends React.Component {
           style={{ flex: 1, alignItems: 'center' }}
         >
           <View style={{ width: '100%', opacity: 0.3 }}>
-            <Header headerText='Tainment' color='black' bar={this.state.bar} />
+            <Header headerText='Airtainment' color='black' bar={this.state.bar} />
           </View>
            { !this.state.sessionStarted ?
            <View>
@@ -95,7 +95,7 @@ class WelcomeScreen extends React.Component {
           :
           <View>
             <View style = {{marginTop:100, marginBottom: 100}}>
-            <View style ={{display:'flex', alignItems:'center'}}>  
+            <View style ={{display:'flex', alignItems:'center'}}>
               <Image
                 source={require('../assets/clearamericanairlines.png')}
                 style={{ overflow:'visible', width:350, height:50}}

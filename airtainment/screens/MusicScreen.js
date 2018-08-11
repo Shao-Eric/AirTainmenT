@@ -68,7 +68,7 @@ class MusicScreen extends React.Component {
             this.setModalVisible(true);
           }}
         >
-          ADD
+          <Entypo name="circle-with-plus" size={30} color="lightGray" />
         </Button>
       </View>
     );
