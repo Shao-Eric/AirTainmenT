@@ -19,7 +19,7 @@ export default class QrScreen extends React.Component {
       	}}>Scan with AirghgTainmenT app to begin your personalized experience </Text>
         <Qrcode style = {{margin: 20}}
         	value = {"ilovecse"}
-        	size = {300}
+        	size = {100}
         />
         <TouchableHighlight onPress={()=>this.openMediaLibrary("userid")}>
 	        <Text style = {{

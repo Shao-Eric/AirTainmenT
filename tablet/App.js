@@ -1,6 +1,10 @@
 import React from 'react';
 import Stack from './navigation/stack'
 import firebase from 'firebase'
+import {View,Text} from 'react-native'
+import Header from './components/header'
+import Drawer from 'react-native-drawer-menu';
+import {Easing} from 'react-native'; 
 
 export default class App extends React.Component {
   componentWillMount() {
@@ -16,9 +20,29 @@ export default class App extends React.Component {
     firebase.initializeApp(config);
   }
 
+  toggleDrawer=()=>{
+    //this.props.drawer.closeDrawer()
+
+  }
+
   render() {
+    let drawerContent = (
+      <View style={{backgroundColor: 'white', flex:1}}>
+      <Text style = {{marginTop:15,fontSize:20,padding:8}}>Offers</Text>
+
+  </View>);
+
     return (
+      <Drawer
+      ref={compenent => this.drawer = compenent}
+      drawerPosition={Drawer.positions.Right} 
+      drawerWidth={300}
+      drawerContent={drawerContent}
+      type={Drawer.types.Overlay}
+      >
+      <Header openDrawer={()=> this.drawer.openDrawer()}/>
       <Stack/>
+      </Drawer>
     );
   }
 }
