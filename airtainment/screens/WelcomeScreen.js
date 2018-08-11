@@ -38,7 +38,7 @@ class WelcomeScreen extends React.Component {
             source={require('../assets/CityDimmed.jpg')}
             style={{ flex: 1, alignItems:'center'}}>
             <View style = {{width: '100%'}}>
-             <Header headerText='Hackathon' bar={this.state.bar}/>
+             <Header headerText='Tainment' bar={this.state.bar}/>
             </View>
             <View style = {{width: 300, height: 300, margin: 60}}>
               <BarCodeScanner
