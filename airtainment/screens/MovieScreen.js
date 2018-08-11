@@ -32,7 +32,7 @@ class MovieScreen extends React.Component {
     let ref = firebase.database().ref('userid/movies');
     ref.on('value', snapshot => {
       let result = snapshot.val();
-      console.log(result);
+      // console.log(result);
       this.setState({ data: result });
     });
   }
@@ -98,8 +98,8 @@ class MovieScreen extends React.Component {
                   />
                 </View>
                 <View style={styles.headerContentStyle}>
-                  <Text style={styles.headerTextStyle}>title</Text>
-                  <Text style={{marginTop: 10}} >artist</Text>
+                  <Text style={styles.headerTextStyle}>{item.title}</Text>
+                  <Text style={{marginTop: 10}} >{item.artist}</Text>
                 </View>
               </CardSection>
             </Card>
@@ -141,7 +141,7 @@ const styles = {
     alignItems:'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 22
   },
   thumbnailStyle: {
     height: 150,
