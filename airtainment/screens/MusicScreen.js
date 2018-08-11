@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, FlatList, Modal, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { List, ListItem, SearchBar } from 'react-native-elements';
+import { Entypo } from '@expo/vector-icons';
 import Header from '../common/Header';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
@@ -12,6 +13,11 @@ class MusicScreen extends React.Component {
     data: [],
     modalVisible: false
   };
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: 'Settings',
+    tabBarIcon: () => <Entypo name="folder-music" size={30} color="#1b3039" />
+  });
+
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
@@ -24,7 +30,12 @@ class MusicScreen extends React.Component {
     });
   }
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return (
+      <View>
+        <SearchBar placeholder="Type Here..." lightTheme round />;
+        {this.renderFooter()}
+      </View>
+    );
   };
   renderSeparator = () => {
     return (
@@ -39,30 +50,33 @@ class MusicScreen extends React.Component {
     );
   };
 
+  renderFooter = () => {
+    return (
+      <View
+        style={{
+          borderBottomWidth: 1,
+          padding: 5,
+          backgroundColor: '#fff',
+          flexDirection: 'row',
+          borderColor: '#ddd',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Button
+          onPress={() => {
+            this.setModalVisible(true);
+          }}
+        >
+          ADD
+        </Button>
+      </View>
+    );
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header headerText="Music" />
-        <View
-          style={{
-            borderBottomWidth: 1,
-            padding: 5,
-            backgroundColor: '#fff',
-            flexDirection: 'row',
-            borderColor: '#ddd',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Button
-            onPress={() => {
-              this.setModalVisible(true);
-            }}
-          >
-            ADD
-          </Button>
-        </View>
-
         <FlatList
           style={{ flex: 1 }}
           data={this.state.data}
@@ -90,13 +104,13 @@ class MusicScreen extends React.Component {
           <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
-            <Button
+            <TouchableOpacity
               onPress={() => {
                 this.setModalVisible(!this.state.modalVisible);
               }}
             >
-              Close Modal
-            </Button>
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       </View>

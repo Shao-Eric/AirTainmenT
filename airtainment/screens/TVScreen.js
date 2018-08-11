@@ -1,7 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-
+import { Entypo } from '@expo/vector-icons';
 class TVScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    tabBarIcon: () => <Entypo name="folder-video" size={30} color="#1b3039" />
+  });
   render() {
     return (
       <View>
