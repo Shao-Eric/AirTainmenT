@@ -25,7 +25,7 @@ class MovieScreen extends React.Component {
     });
   }
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return <SearchBar placeholder="Type Here..." lightTheme round />
   };
   renderSeparator = () => {
     return (
