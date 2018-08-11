@@ -36,7 +36,7 @@ class WelcomeScreen extends React.Component {
         <ImageBackground 
             source={require('../assets/CityDimmed.jpg')}
             style={{ flex: 1, alignItems:'center'}}>
-            <View style = {{width: '100%'}}>
+            <View style = {{width: '100%', opacity: .3}}>
              <Header headerText='Tainment' color= 'black' bar={this.state.bar}/>
             </View>
             <View style = {{width: 300, height: 300, margin: 60}}>
@@ -53,6 +53,7 @@ class WelcomeScreen extends React.Component {
               <TouchableOpacity
                 style = {styles.Button}
                 onPress = {() => this.buttonPress()}
+                activeOpacity = {0.6}
               >
                 <Text style = {{color: 'white', alignSelf:'center', textAlign: 'center'}}>Manage Library</Text>
               </TouchableOpacity>
