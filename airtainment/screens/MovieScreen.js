@@ -13,11 +13,11 @@ class MovieScreen extends React.Component {
   };
 
   static navigationOptions = ({ navigation }) => ({
-    tabBarIcon: () => <Entypo name="tv" size={30} color="#1b3039" />
+    tabBarIcon: () => <Entypo name="video" size={30} color="#1b3039" />
   });
 
   componentDidMount() {
-    let ref = firebase.database().ref('userid/music');
+    let ref = firebase.database().ref('userid/movies');
     ref.on('value', snapshot => {
       let result = snapshot.val();
       console.log(result);
