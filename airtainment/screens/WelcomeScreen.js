@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  Dimensions,
   TouchableWithoutFeedback
 } from 'react-native'
 import Header from '../common/Header'
@@ -93,11 +94,13 @@ class WelcomeScreen extends React.Component {
           </View>
           :
           <View>
-            <View style = {{marginTop:100, marginBottom: 100}}>         
+            <View style = {{marginTop:100, marginBottom: 100}}>
+            <View style ={{display:'flex', alignItems:'center'}}>  
               <Image
-                source={require('../assets/AmericanAirlines.png')}
-                style={{width:450, height:100}}
+                source={require('../assets/clearamericanairlines.png')}
+                style={{ overflow:'visible', width:350, height:50}}
               />
+            </View>
                 <Text
                 style={{
                   color: 'white',
