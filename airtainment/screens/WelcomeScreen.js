@@ -2,24 +2,27 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import Header from '../common/Header'
 import { BarCodeScanner, Permissions } from 'expo';
-import firebase from 'firebase';
+import firebase from 'firebase'
 
 class WelcomeScreen extends React.Component {
-
   state = {
     hasCameraPermission: null,
     sessionStarted: false,
     bar: 'Scan a BARcode to begin'
-  }
+  };
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({hasCameraPermission: status === 'granted'});
+    this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
+  buttonPress = () => {
+    this.props.navigation.navigate('main')
   }
 
   _handleBarCodeRead = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  }
+    firebase.database().ref(data+"/userid").set("userid")
+  };
 
   render() {
     const { hasCameraPermission } = this.state;
@@ -30,7 +33,7 @@ class WelcomeScreen extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-          <ImageBackground 
+        <ImageBackground 
             source={require('../assets/CityDimmed.jpg')}
             style={{ flex: 1, alignItems:'center'}}>
             <View style = {{width: '100%'}}>
@@ -49,7 +52,7 @@ class WelcomeScreen extends React.Component {
               <Text style={{color:'white', textAlign: 'center', fontWeight: '100', fontSize: 30}}> To connect to your screen </Text>
               <TouchableOpacity
                 style = {styles.Button}
-                onPress = {() => console.log('Hello world')}
+                onPress = {() => this.buttonPress()}
               >
                 <Text style = {{color: 'white', alignSelf:'center', textAlign: 'center'}}>Manage Library</Text>
               </TouchableOpacity>
@@ -72,6 +75,3 @@ const styles = StyleSheet.create({
   }
 })
 export default WelcomeScreen;
-
-
-
