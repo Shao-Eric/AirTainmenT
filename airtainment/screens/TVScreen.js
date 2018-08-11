@@ -137,7 +137,7 @@ const styles = {
   headerContentStyle: {
     flexDirection: 'column',
     justifyContent: 'center',
-    margin:40,
+  
     alignItems:'center'
   },
   headerTextStyle: {
