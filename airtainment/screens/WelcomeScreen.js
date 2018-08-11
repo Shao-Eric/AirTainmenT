@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import Header from '../common/Header'
 import { BarCodeScanner, Permissions } from 'expo';
-import firebase from 'firebase'
+import firebase, { database } from 'firebase'
 
 class WelcomeScreen extends React.Component {
   state = {
@@ -55,8 +55,14 @@ class WelcomeScreen extends React.Component {
                 onPress = {() => this.buttonPress()}
                 activeOpacity = {0.6}
               >
-                <Text style = {{color: 'white', alignSelf:'center', textAlign: 'center'}}>Manage Library</Text>
+                <Text style = {{color: 'white', alignSelf:'center', fontSize: 25, textAlign: 'center'}}>Manage Library</Text>
               </TouchableOpacity>
+            <View style = {{position:'absolute', width:'100%', bottom: 0, left: 0}}>
+              <View style = {{ height: 60, backgroundColor:'gray'}}>
+                  <Text style={{width: '90%'}}>MusicTitle</Text>
+                  <Text style ={{width:'10%'}}>Play</Text>
+              </View>
+            </View>
             {/* </View> */}
           </ImageBackground>
       );
@@ -67,8 +73,8 @@ class WelcomeScreen extends React.Component {
 const styles = StyleSheet.create({
   Button: {
     margin: 50,
-    width: 150,
-    height: 50,
+    width: 300,
+    height: 80,
     borderRadius: 40,
     display:'flex',
     justifyContent:'center',
