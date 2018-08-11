@@ -83,7 +83,7 @@ class MusicScreen extends React.Component {
           renderItem={({ item }) => (
             <ListItem
               roundAvatar
-              title={`${item.title}`}
+              title={`${item.artist}`}
               subtitle={item.title}
               avatar={{ uri: item.image }}
               containerStyle={{ borderBottomWidth: 0 }}

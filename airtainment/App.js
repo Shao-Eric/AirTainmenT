@@ -12,17 +12,19 @@ import TVScreen from './screens/TVScreen';
 
 const MainNavigator = createStackNavigator(
   {
-    welcome: { screen: WelcomeScreen,     
+    welcome: {
+      screen: WelcomeScreen,
       navigationOptions: {
-      header: null
-    }},
+        header: null
+      }
+    },
     main: {
       screen: createBottomTabNavigator({
+        music: { screen: MusicScreen },
         movie: { screen: MovieScreen },
-        tv: { screen: TVScreen },
-        music: { screen: MusicScreen }
+        tv: { screen: TVScreen }
       })
-    },
+    }
   }
   // {
   //   navigationOptions: {
