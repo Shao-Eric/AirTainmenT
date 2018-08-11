@@ -15,14 +15,14 @@ import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 import Button from '../common/Button';
 
+
 class MovieScreen extends React.Component {
   state = {
     data: [],
     modalVisible: false
   };
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Settings',
-    tabBarIcon: () => <Entypo name="tv" size={30} color="#1b3039" />
+    tabBarIcon: () => <Entypo name="video" size={30} color="#1b3039" />
   });
 
   setModalVisible(visible) {
@@ -39,7 +39,7 @@ class MovieScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." lightTheme round />
+        <SearchBar placeholder="Type Here..." darkTheme round />
         {this.renderFooter()}
       </View>
     );
@@ -50,7 +50,7 @@ class MovieScreen extends React.Component {
         style={{
           height: 1,
           width: '86%',
-          backgroundColor: '#CED0CE',
+          backgroundColor: '#708690',
           marginLeft: '14%'
         }}
       />
@@ -142,8 +142,8 @@ const styles = {
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 150,
-    width: 150
+    height: 100,
+    width: 50
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',
