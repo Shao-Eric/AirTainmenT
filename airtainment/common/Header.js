@@ -19,10 +19,14 @@ const styles = {
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.5,
     elevation: 2,
-    position: 'relative'
+    position: 'relative',
+    opacity: .3,
   },
   textStyle: {
-    fontSize: 20
+    opacity: 1,
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
   }
 };
 export default Header;

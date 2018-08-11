@@ -58,8 +58,8 @@ class WelcomeScreen extends React.Component {
           source={require('../assets/CityDimmed.jpg')}
           style={{ flex: 1, alignItems: 'center' }}
         >
-          <View style={{ width: '100%', opacity: 0.3 }}>
-            <Header headerText='Airtainment' color='black' bar={this.state.bar} />
+          <View style={{ width: '100%' }}>
+            <Header headerText='Airtainment'  bar={this.state.bar} />
           </View>
            { !this.state.sessionStarted ?
            <View>
@@ -86,8 +86,8 @@ class WelcomeScreen extends React.Component {
             style={{
               color: 'white',
               textAlign: 'center',
-              fontWeight: '100',
-              fontSize: 30
+              fontWeight: '400',
+              fontSize: 25
             }}
           >To connect to your screen
           </Text>
@@ -153,6 +153,7 @@ class WelcomeScreen extends React.Component {
                 color: 'white',
                 alignSelf: 'center',
                 fontSize: 25,
+                fontWeight: 'bold',
                 textAlign: 'center'
               }}
             >
