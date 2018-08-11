@@ -39,7 +39,7 @@ class TVScreen extends React.Component {
   renderHeader = () => {
     return (
       <View>
-        <SearchBar placeholder="Type Here..." lightTheme round />
+        <SearchBar placeholder="Type Here..." darkTheme round />
         {this.renderFooter()}
       </View>
     );
@@ -70,13 +70,13 @@ class TVScreen extends React.Component {
           alignItems: 'center'
         }}
       >
-        <Button
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          ADD
-        </Button>
+      <Button
+        onPress={() => {
+          this.setModalVisible(true);
+        }}
+      >
+        <Entypo name="circle-with-plus" size={30} color="" />
+      </Button>
       </View>
     );
   };

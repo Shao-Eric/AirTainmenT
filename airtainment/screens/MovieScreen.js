@@ -70,13 +70,13 @@ class MovieScreen extends React.Component {
           alignItems: 'center'
         }}
       >
-        <Button
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          ADD
-        </Button>
+      <Button
+        onPress={() => {
+          this.setModalVisible(true);
+        }}
+      >
+        <Entypo name="circle-with-plus" size={30} color="" />
+      </Button>
       </View>
     );
   };
