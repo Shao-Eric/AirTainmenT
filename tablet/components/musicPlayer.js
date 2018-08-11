@@ -21,10 +21,10 @@ export default class MusicPlayer extends React.Component {
 		this.setState({music: this.props.song})
 
     await this.soundObject.loadAsync({uri: this.props.song.link});
-    firebase.database().ref("tablet/currentlyPlaying").set({playing: false, image: this.props.song.image, title: this.props.song.title})
+    firebase.database().ref("tablet/currentlyPlaying").set({isPlaying: false, image: this.props.song.image, title: this.props.song.title})
 
     firebase.database().ref("tablet/currentlyPlaying/isPlaying").on('value', (v)=>{
-      if(!v.val()){
+      if(v.val()){
         this.soundObject.pauseAsync()
       }else{
         this.soundObject.playAsync()
@@ -50,15 +50,8 @@ export default class MusicPlayer extends React.Component {
 				</View>
 				<View style={{flexDirection: "row"}}>
 					<TouchableOpacity onPress={()=>{
-						if(this.state.playing){
-							this.soundObject.pauseAsync()
-						}else{
-							this.soundObject.playAsync()
-						}
             firebase.database().ref("tablet/currentlyPlaying/isPlaying").set(!this.state.playing)
-
-						this.setState({playing: !this.state.playing})
-					} }>
+          } }>
 						{this.state.playing===false?
 							<Image source={require("../images/ic_action_play_arrow.png")} style = {{width:50,height:50}}/>:
 							<Image source={require("../images/ic_action_pause.png")} style={{width: 50, height: 50}}/>}
