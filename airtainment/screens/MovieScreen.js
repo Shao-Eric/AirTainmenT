@@ -142,8 +142,8 @@ const styles = {
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 100,
-    width: 50
+    height: 150,
+    width: 150
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',
