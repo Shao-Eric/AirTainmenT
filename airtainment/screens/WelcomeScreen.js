@@ -19,12 +19,21 @@ class WelcomeScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     sessionStarted: false,
-    bar: 'Scan a BARcode to begin'
+    bar: 'Scan a BARcode to begin',
+    imageUrl:'',
+    title:''
   }
 
   async componentWillMount () {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({ hasCameraPermission: status === 'granted' })
+  }
+
+  componentDidMount = () => {
+    firebase.database().ref('tablet/currentlyPlaying').on('value', (v) => {
+      let data = v.val()
+      this.setState({imageUrl:data.image, title:data.title, isPlaying: data.isPlaying})
+    })
   }
 
   buttonPress = () => {
@@ -41,8 +50,7 @@ class WelcomeScreen extends React.Component {
   }
 
   changePlayStatus = () => {
-    const getPlayStatus = this.state.isPlaying
-    this.setState({ isPlaying: !getPlayStatus })
+    firebase.database().ref('tablet/currentlyPlaying/isPlaying').set(!this.state.isPlaying)
   }
 
   render () {
@@ -182,15 +190,15 @@ class WelcomeScreen extends React.Component {
                       flexDirection: 'row'
                     }}
                   >
-                    <View
+                    <Image
+                      source={{uri: this.state.imageUrl}}
                       style={{
-                        backgroundColor: 'white',
-                        borderRadius: 40,
+                        borderRadius: 25,
                         width: 50,
                         height: 50
                       }}
                     />
-                    <Text style={{ fontSize: 18, marginLeft: 15 }}>Movie</Text>
+                    <Text style={{ fontSize: 18, marginLeft: 15 }}>{this.state.title}</Text>
                   </View>
                 </View>
                 <TouchableWithoutFeedback
