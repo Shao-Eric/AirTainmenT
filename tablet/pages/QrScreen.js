@@ -1,11 +1,20 @@
 import React from 'react'
 import {View, Text, TouchableHighlight} from 'react-native'
 import Qrcode from 'react-native-qrcode'
+import firebase from 'firebase'
 
 export default class QrScreen extends React.Component {
 	openMediaLibrary(userid) {
 		this.props.navigation.navigate('LibraryScreen',{
 			userid: userid
+		})
+	}
+
+	componentDidMount(){
+		firebase.database().ref("tablet/userid").on("value", (a)=>{
+			if (a.val() === "userid"){
+				this.openMediaLibrary("userid")
+			}
 		})
 	}
 
@@ -18,7 +27,7 @@ export default class QrScreen extends React.Component {
       	}}>Scan with the Airtainment app to begin your personalized experience </Text>
 				<View style={{margin: 80}}>
 					<Qrcode
-						value = {"ilovecse"}
+						value = {"tablet"}
 						size = {300}
 					/>
 				</View>

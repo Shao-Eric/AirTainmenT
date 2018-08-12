@@ -5,7 +5,7 @@ export default class Header extends React.Component{
 		return(
 			<View style = {{width:"100%",height:100,backgroundColor:"#455a64",justifyContent:"space-between",
 			paddingTop:20, flexDirection:"row",alignItems:"center"}}>
-				
+
 				<TouchableOpacity onPress={()=>this.props.goBack()}
 					style = {{flexDirection: "row",alignItems:"center"}}>
 					<View style={{padding: 22}}>
@@ -18,9 +18,9 @@ export default class Header extends React.Component{
 
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={()=>this.props.openDrawer()}
+				<TouchableOpacity onPress={()=>this.props.toggleDrawer()}
 					style = {{flexDirection: "row",alignItems:"center"}}>
-					<Text style = {{color:"#ffffff",fontSize:22, margin: 4 }}>Offers</Text>
+					<Text style = {{color:"#ffffff",fontSize:22, margin: 4 }}>Services</Text>
 					<View style={{padding: 22}}>
 						<Image
 							source = {require("../images/ic_action_menu.png")}
