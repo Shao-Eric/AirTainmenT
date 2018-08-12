@@ -20,7 +20,6 @@ const styles = {
   },
   buttonStyle: {
     flex: 1,
-    fontWeight: 'bold',
     backgroundColor: '#f5f5f5',
 
   }

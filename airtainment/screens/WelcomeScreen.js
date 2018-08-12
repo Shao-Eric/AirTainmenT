@@ -32,7 +32,7 @@ class WelcomeScreen extends React.Component {
   componentDidMount = () => {
     firebase.database().ref('tablet/currentlyPlaying').on('value', (v) => {
       let data = v.val()
-      this.setState({imageUrl:data.image, title:data.title, isPlaying: data.isPlaying})
+      this.setState({imageUrl:data.image, title:data.title, type: data.type, isPlaying: data.isPlaying})
     })
   }
 
@@ -41,16 +41,27 @@ class WelcomeScreen extends React.Component {
   }
 
   _handleBarCodeRead = ({ type, data }) => {
+    if (data==="tablet"){
     firebase
       .database()
       .ref(data + '/userid')
       .set('userid')
 
     this.setState({sessionStarted: true})
+    }
   }
 
   changePlayStatus = () => {
     firebase.database().ref('tablet/currentlyPlaying/isPlaying').set(!this.state.isPlaying)
+  }
+
+  resetApp = () => {
+    firebase
+    .database()
+    .ref('tablet' + '/userid')
+    .set('default')
+    this.setState({sessionStarted: false})
+    
   }
 
   render () {
@@ -154,6 +165,7 @@ class WelcomeScreen extends React.Component {
           <TouchableOpacity
             style={styles.Button}
             onPress={() => this.buttonPress()}
+            onLongPress={() => this.resetApp()}
             activeOpacity={0.6}
           >
             <Text
@@ -200,18 +212,18 @@ class WelcomeScreen extends React.Component {
                     <Text style={{ fontSize: 18, marginLeft: 15 }}>{this.state.title}</Text>
                   </View>
                 </View>
-                <TouchableWithoutFeedback
+                {this.state.type == 'audio' ? <TouchableWithoutFeedback
                   style={{ flex: 1, alignSelf: 'center' }}
                   onPress={() => this.changePlayStatus()}
                 >
-                  <View style={{ flex: 1, justifyContent: 'center' }}>
-                    {this.state.isPlaying ? (
-                      <Ionicons name='md-pause' size={32} color='black' />
-                    ) : (
-                      <Ionicons name='md-play' size={32} color='black' />
-                    )}
-                  </View>
-                </TouchableWithoutFeedback>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                      {this.state.isPlaying ? (
+                        <Ionicons name='md-pause' size={32} color='black' />
+                      ) : (
+                        <Ionicons name='md-play' size={32} color='black' />
+                      )}
+                    </View>
+                </TouchableWithoutFeedback> : null}
               </View>
             </View> : null }
         </ImageBackground>
@@ -227,7 +239,6 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     display: 'flex',
-    fontWeight: 'bold',
     justifyContent: 'center',
     backgroundColor: '#6f79a8'
   }
